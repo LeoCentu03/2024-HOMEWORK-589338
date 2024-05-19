@@ -34,4 +34,19 @@ public class StanzaBuiaTest {
         this.stanzaBuia.addAttrezzo(new Attrezzo(ATTREZZO_TEST, 1));
         assertNull(this.stanzaBuia.getAttrezzo("inesistente"));      
     }
+    
+    @Test
+    public void testAddAttrezzo() {
+        Attrezzo attrezzo = new Attrezzo("lanterna", 2);
+        assertTrue(this.stanzaBuia.addAttrezzo(attrezzo));
+        assertEquals(attrezzo, this.stanzaBuia.getAttrezzo("lanterna"));
+    }
+
+    @Test
+    public void testRemoveAttrezzo() {
+        Attrezzo attrezzo = new Attrezzo("lanterna", 2);
+        this.stanzaBuia.addAttrezzo(attrezzo);
+        assertTrue(this.stanzaBuia.removeAttrezzo(attrezzo));
+        assertNull(this.stanzaBuia.getAttrezzo("lanterna"));
+    }
 }

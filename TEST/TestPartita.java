@@ -1,6 +1,9 @@
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.Partita;
 
@@ -13,7 +16,8 @@ public class TestPartita {
     
     @Before
     public void setUp() {
-        partita = new Partita();
+    	Labirinto labirinto = new Labirinto();
+        partita = new Partita(labirinto);
         stanzaVincente = partita.getStanzaVincente();
     }
 

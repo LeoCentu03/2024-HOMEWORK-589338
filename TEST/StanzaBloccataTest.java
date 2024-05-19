@@ -33,5 +33,22 @@ public class StanzaBloccataTest {
         stanzaBloccata.addAttrezzo(attrezzoDiTest);
         assertNull(stanzaBloccata.getAttrezzo("inesistente"));      
     }
+    
+    @Test
+    public void testSbloccoStanzaConAttrezzo() {
+        stanzaBloccata.impostaStanzaAdiacente("nord", stanzaAdiacente);
+        stanzaBloccata.addAttrezzo(new Attrezzo("chiave", 1));
+        assertEquals(stanzaAdiacente, stanzaBloccata.getStanzaAdiacente("nord"));
+    }
+
+    @Test
+    public void testDescrizioneStanzaConEsenzaAttrezzoSbloccante() {
+        stanzaBloccata.impostaStanzaAdiacente("nord", stanzaAdiacente);
+        String descrizioneSenzaChiave = "Stanza bloccata\nUscite: [nord]\nAttrezzi nella stanza: []";
+        assertEquals(descrizioneSenzaChiave, stanzaBloccata.getDescrizione());
+        stanzaBloccata.addAttrezzo(new Attrezzo("chiave", 1));
+        String descrizioneConChiave = "Stanza bloccata\nUscite: [nord]\nAttrezzi nella stanza: [chiave (1kg)]";
+        assertEquals(descrizioneConChiave, stanzaBloccata.getDescrizione());
+    }
 }
 

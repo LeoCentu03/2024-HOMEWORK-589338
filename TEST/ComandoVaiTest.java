@@ -1,10 +1,11 @@
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.comandi.ComandoVai;
-
 import it.uniroma3.diadia.IO;
 
 public class ComandoVaiTest {
@@ -14,7 +15,10 @@ public class ComandoVaiTest {
 
     @Before
     public void setUp() {
-        partita = new Partita();
+        Labirinto labirinto = new Labirinto();
+        Stanza stanzaIniziale = new Stanza("Atrio");
+        labirinto.setStanzaIniziale(stanzaIniziale);
+        partita = new Partita(labirinto);
         comandoVai = new ComandoVai();
         testIO = new TestIO();
         comandoVai.setIO(testIO);
@@ -34,23 +38,22 @@ public class ComandoVaiTest {
     public void testMovimentoDirezioneNonValida() {
         comandoVai.setParametro("sud");
         comandoVai.esegui(partita);
-        assertEquals("Direzione inesistente", testIO.getmostraMessaggio());
+        assertEquals("Direzione inesistente", testIO.getUltimoMessaggioMostrato());
     }
 
     @Test
     public void testMancanzaParametro() {
         comandoVai.setParametro(null);
         comandoVai.esegui(partita);
-        assertEquals("Dove vuoi andare? Devi specificare una direzione", testIO.getmostraMessaggio());
+        assertEquals("Dove vuoi andare? Devi specificare una direzione", testIO.getUltimoMessaggioMostrato());
     }
     
     @Test
     public void testMovimentoDirezioneNonAdiacente() {
         comandoVai.setParametro("nord");
         comandoVai.esegui(partita);
-        assertEquals("Direzione inesistente", testIO.getmostraMessaggio());
+        assertEquals("Direzione inesistente", testIO.getUltimoMessaggioMostrato());
     }
-
 
     private class TestIO implements IO {
         private String ultimoMessaggioMostrato;
@@ -65,9 +68,8 @@ public class ComandoVaiTest {
             return null;
         }
 
-        public String getmostraMessaggio() {
+        public String getUltimoMessaggioMostrato() {
             return this.ultimoMessaggioMostrato;
         }
     }
 }
-
