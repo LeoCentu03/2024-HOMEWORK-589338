@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.comandi.ComandoVai;
@@ -28,7 +29,7 @@ public class ComandoVaiTest {
     public void testMovimentoDirezioneValida() {
         Stanza stanzaCorrente = partita.getStanzaCorrente();
         Stanza nuovaStanza = new Stanza("Nuova Stanza");
-        stanzaCorrente.impostaStanzaAdiacente("nord", nuovaStanza);
+        stanzaCorrente.impostaStanzaAdiacente(Direzione.NORD, nuovaStanza);
         comandoVai.setParametro("nord");
         comandoVai.esegui(partita);
         assertEquals(nuovaStanza.getNome(), partita.getStanzaCorrente().getNome());

@@ -3,6 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.ambienti.*;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 
 
 public class LabirintoBuilderTest {
@@ -35,7 +36,7 @@ public class LabirintoBuilderTest {
         assertNull(labirinto.getStanzaVincente());
         
         Stanza stanza1 = labirinto.getStanzaIniziale();
-        Stanza stanza2 = stanza1.getStanzaAdiacente("nord");
+        Stanza stanza2 = stanza1.getStanzaAdiacente(Direzione.NORD);
         
         assertNotNull(stanza2);
         assertEquals("Stanza2", stanza2.getNome());
@@ -56,8 +57,8 @@ public class LabirintoBuilderTest {
         assertEquals("Stanza3", labirinto.getStanzaVincente().getNome());
         
         Stanza stanza1 = labirinto.getStanzaIniziale();
-        Stanza stanza2 = stanza1.getStanzaAdiacente("nord");
-        Stanza stanza3 = stanza2.getStanzaAdiacente("est");
+        Stanza stanza2 = stanza1.getStanzaAdiacente(Direzione.NORD);
+        Stanza stanza3 = stanza2.getStanzaAdiacente(Direzione.EST);
         
         assertNotNull(stanza2);
         assertEquals("Stanza2", stanza2.getNome());
